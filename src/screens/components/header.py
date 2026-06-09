@@ -12,3 +12,17 @@ def header_home():
                 
                 """, unsafe_allow_html=True)
     
+
+def header_dashboard():
+    logo_url = "https://res.cloudinary.com/dt0souxst/image/upload/v1779278495/file_0000000009e4722fb45e2f0f4ccdc363_z7jslu.png"
+    st.markdown(f"""
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src='{logo_url}' style='height:45px; display:block;'/>
+    <span style='color:#6B403C; font-size:1.8rem; font-weight:bold; line-height:1; margin:0;'>CliqRoll</span>
+    </div>
+                
+                
+                """, unsafe_allow_html=True)
+    
+
+
