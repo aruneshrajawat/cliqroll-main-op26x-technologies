@@ -77,14 +77,17 @@ def predict_attendance(class_image_np):
         if len(all_students) >= 2:
             clf = model_data['clf']
             predicted_id = int(clf.predict([encoding])[0])
+            idx = y_train.index(predicted_id)
+            student_embedding = X_train[idx]
+            best_match_score = np.linalg.norm(student_embedding - encoding)
+            if best_match_score <= 0.6:
+                detected_student[predicted_id] = True
         else:
             predicted_id = int(all_students[0])
-
-        idx = y_train.index(predicted_id)
-        student_embedding = X_train[idx]
-        best_match_score = np.linalg.norm(student_embedding - encoding)
-
-        if best_match_score <= 0.6:
-            detected_student[predicted_id] = True
+            idx = y_train.index(predicted_id)
+            student_embedding = X_train[idx]
+            best_match_score = np.linalg.norm(student_embedding - encoding)
+            if best_match_score <= 0.4:
+                detected_student[predicted_id] = True
 
     return detected_student, encodings, len(encodings), all_students
