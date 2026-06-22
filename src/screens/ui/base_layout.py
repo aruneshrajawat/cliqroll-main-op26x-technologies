@@ -124,8 +124,23 @@ def style_base_layout():
                 opacity: 0.9 !important;
             }
 
-            div[data-testid="stContainer"] {
-                border-color: #BAC095 !important;
+            /* Dialog/Modal text fix */
+            div[data-testid="stDialog"] {
+                background-color: #ffffff !important;
+            }
+            div[data-testid="stDialog"] * {
+                color: #000000 !important;
+            }
+            div[data-testid="stDialog"] input {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                border: 1px solid #BAC095 !important;
+            }
+            div[data-testid="stDialog"] button[kind="primary"] p {
+                color: #ffffff !important;
+            }
+            div[data-testid="stDialog"] button[kind="secondary"] p {
+                color: #000000 !important;
             }
 
             div[data-testid="stMetric"] {
