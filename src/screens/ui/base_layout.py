@@ -70,6 +70,10 @@ def style_base_layout():
                 transition: transform 0.2s ease !important;
             }
 
+            button[kind="primary"] p {
+                color: #ffffff !important;
+            }
+
             button[kind="secondary"] {
                 border-radius: 1.5rem !important;
                 background-color: #ffffff !important;
@@ -80,6 +84,10 @@ def style_base_layout():
                 transition: transform 0.2s ease !important;
             }
 
+            button[kind="secondary"] p {
+                color: #000000 !important;
+            }
+
             button[kind="tertiary"] {
                 border-radius: 1.5rem !important;
                 background-color: transparent !important;
@@ -88,6 +96,27 @@ def style_base_layout():
                 font-family: 'Outfit', sans-serif !important;
                 font-size: 1rem !important;
                 transition: transform 0.2s ease !important;
+            }
+
+            button[kind="tertiary"] p {
+                color: #000000 !important;
+            }
+
+            /* selectbox, input, text area on dark background */
+            div[data-baseweb="select"] *, 
+            div[data-baseweb="input"] *,
+            .stTextInput input,
+            .stSelectbox div {
+                color: #000000 !important;
+                background-color: #ffffff !important;
+            }
+
+            /* metric label and value */
+            div[data-testid="stMetricLabel"] p {
+                color: #000000 !important;
+            }
+            div[data-testid="stMetricValue"] {
+                color: #000000 !important;
             }
 
             button:hover {
