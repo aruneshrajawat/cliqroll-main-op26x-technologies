@@ -5,7 +5,7 @@ def header_home():
     st.markdown(f"""
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:0px; margin-top:0px;">
         <img src='{logo_url}' style='height:100px;'/>
-        <h1 style='text-align:center;'>CliqRoll</h1>
+        <h1 style='text-align:center; color:#000000;'>CliqRoll</h1>
     </div>
     """, unsafe_allow_html=True)
 
@@ -15,6 +15,6 @@ def header_dashboard():
     st.markdown(f"""
     <div style="display:flex; align-items:center; gap:10px;">
         <img src='{logo_url}' style='height:45px; display:block;'/>
-        <span style='color:#1A1A2E; font-size:1.8rem; font-weight:bold; line-height:1; margin:0; font-family:Climate Crisis, sans-serif;'>CliqRoll</span>
+        <span style='color:#000000; font-size:1.8rem; font-weight:bold; line-height:1; margin:0; font-family: Climate Crisis, sans-serif;'>CliqRoll</span>
     </div>
     """, unsafe_allow_html=True)
