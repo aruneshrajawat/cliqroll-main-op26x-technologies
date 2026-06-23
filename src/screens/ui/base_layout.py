@@ -42,12 +42,26 @@ def style_base_layout():
                 #MainMenu,footer,header{
                     visibility:hidden;
                 }
+
+                /* Hide Streamlit toolbar and logo */
+                [data-testid="stToolbar"] {
+                    display: none !important;
+                }
+
+                [data-testid="stDecoration"] {
+                    display: none !important;
+                }
+
+                [data-testid="stStatusWidget"] {
+                    display: none !important;
+                }
+
                 .block-container{
-                    padding-top1.5rem !important;
+                    padding-top:1.5rem !important;
                 }
                 .stApp{
                     background: #BAC095!important;
-                
+                }
                 h1{
                     font-family: 'Climate Crisis', sans-serif !important;
                     font-size : 3.5rem !important;
@@ -63,7 +77,7 @@ def style_base_layout():
                     color: #2C2C2C;
                 }
 
-                h3,h4,p,{
+                h3,h4,p{
                     font-family: 'Outfit', sans-serif !important;
                     color: #2C2C2C;
                 }
