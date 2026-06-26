@@ -6,9 +6,10 @@ import streamlit as st
 
 
 from src.screens.database.db import get_all_students 
+
 @st.cache_resource
 def load_dlib_models():
-    detector = dlib.get_frontal_face_detector()
+    detector = dlib.cnn_face_detection_model_v1("models/mmod_human_face_detector.dat")
 
     sp = dlib.shape_predictor(face_recognition_models.pose_predictor_model_location())
 
@@ -18,14 +19,13 @@ def load_dlib_models():
 
 
 def get_face_embeddings(image_np):
-    detector, sp , facerec = load_dlib_models()
-    faces = detector (image_np,1)
-
+    detector, sp, facerec = load_dlib_models()
+    faces = detector(image_np, 2)
     encodings = []
-
     for face in faces:
-        shape = sp(image_np,face)
-        face_descriptor = facerec.compute_face_descriptor(image_np,shape,1) #128 dimension
+        shape = sp(image_np, face.rect)
+        face_chip = dlib.get_face_chip(image_np, shape, size=150, padding=0.25)
+        face_descriptor = facerec.compute_face_descriptor(face_chip, num_jitters=10)
         encodings.append(np.array(face_descriptor))
     return encodings
 
