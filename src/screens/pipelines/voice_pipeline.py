@@ -12,6 +12,9 @@ def get_voice_embeddings(audio_bytes):
     try:
         encoder = load_voice_encoder()
         audio,sr = librosa.load(io.BytesIO(audio_bytes),sr = 16000)
+        if len(audio) < 16000:
+            print("Audio too short, skipping")
+            return None
         wav = preprocess_wav(audio)
         embedding = encoder.embed_utterance(wav)
         return embedding.tolist()
@@ -20,24 +23,28 @@ def get_voice_embeddings(audio_bytes):
         return None
     
 
-def identify_speaker(new_embedding, candidate_dict, threshold=0.65):
+def identify_speaker(new_embedding, candidate_dict, threshold=0.65, min_margin=0.05):
     if new_embedding is None or not candidate_dict:
         return None, 0.0
-    best_sid = None
-    best_score = -1
-
     new_emb = np.array(new_embedding)
     new_emb = new_emb / (np.linalg.norm(new_emb) + 1e-10)
 
+    scores = []
     for sid, stored_embedding in candidate_dict.items():
         if stored_embedding:
             stored_emb = np.array(stored_embedding)
             stored_emb = stored_emb / (np.linalg.norm(stored_emb) + 1e-10)
             similarity = float(np.dot(new_emb, stored_emb))
-            if similarity > best_score and similarity > threshold:
-                best_score = similarity
-                best_sid = sid
-    if best_score >= threshold:
+            scores.append((sid, similarity))
+
+    if not scores:
+        return None, 0.0
+
+    scores.sort(key=lambda x: x[1], reverse=True)
+    best_sid, best_score = scores[0]
+    second_score = scores[1][1] if len(scores) > 1 else -1
+
+    if best_score >= threshold and (best_score - second_score) >= min_margin:
         return best_sid, best_score
     return None, best_score
             
@@ -52,7 +59,7 @@ def process_bulk_audio(audio_bytes,candidates_dic,threshold = 0.65):
         identified_results = {}
         for start, end in segments:
             start, end = int(start), int(end)
-            if (end - start) < 8000:
+            if (end - start) < 16000:
                 continue 
             segment_audio = audio[start:end]
             wav = preprocess_wav(segment_audio)
