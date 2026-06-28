@@ -128,12 +128,7 @@ def style_base_layout():
                 div[data-testid="stToast"] * {
                     color: #2C2C2C !important;
                 }
-                div[role="dialog"] svg,
-                div[data-testid="stDialog"] svg,
-                div[data-testid*="Dialog"] svg {
-                    fill: #2C2C2C !important;
-                    color: #2C2C2C !important;
-                }
+
                 
         </style>
                 """
