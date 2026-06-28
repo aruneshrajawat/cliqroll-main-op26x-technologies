@@ -112,6 +112,18 @@ def style_base_layout():
                 button:hover{
                     transform: scale(1.05) !important;
                 }
+                div[data-testid="stDialog"] {
+                    background-color: #FDFBD4 !important;
+                }
+                div[data-testid="stDialog"] * {
+                    color: #2C2C2C !important;
+                }
+                div[data-testid="stToast"] {
+                    background-color: #FDFBD4 !important;
+                }
+                div[data-testid="stToast"] * {
+                    color: #2C2C2C !important;
+                }
 
                 
         </style>
